@@ -11,9 +11,9 @@
 ### Установка:
 
 ```bash
-git clone https://github.com/твои-ник/твой-репо.git 
+git clone https://github.com/k3koffer/nextcloud-nodejs-talk-bot.git 
 
-cd твой-репо npm install 
+cd nextcloud-nodejs-talk-bot npm install 
 
 cp .env.example .env 
 
@@ -59,9 +59,9 @@ Requires **Node.js** and the latest versions of **Nextcloud** (has not been test
 ### Installation:
 
 ```bash
-git clone https://github.com/your-username/your-repo.git 
+git clone https://github.com/k3koffer/nextcloud-nodejs-talk-bot.git 
 
-cd your-repo 
+cd nextcloud-nodejs-talk-bot
 
 npm install 
 
