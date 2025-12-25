@@ -1,5 +1,5 @@
-import { config } from '../config/index.js';
-import axios from 'axios';
+let config = require('../config/index.js');
+let axios = require('axios');
 
 const USER = config.botUsername
 const PASS = config.appPassword;
