@@ -16,4 +16,4 @@ const client = axios.create({
     timeout: 10000 
 });
 
-module.exports = { client };
+module.exports = client;
