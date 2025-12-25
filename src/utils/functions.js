@@ -11,14 +11,14 @@ let getStatus = function () {
 };
 
 let getCSRFtoken = async function (server, authString) {
-    const client = require('../core/client').default;
+    const client = require('../core/client');
     let response = client.get(`/index.php/csrftoken`);
     response = (await response).data.token;
     return response;
 }
 
 let getOpenedConversations = async function (server, auth) {
-    const client = require('../core/client').default;
+    const client = require('../core/client');
     let response = await client.get(`/ocs/v2.php/apps/spreed/api/v4/room`);
 
     if (response.status === 401) {

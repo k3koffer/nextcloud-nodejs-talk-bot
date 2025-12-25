@@ -10,5 +10,5 @@ let config = {
     'commandPrefix': process.env.BOT_PREFIX || '!'
 };
 
-module.exports = { config };
+module.exports = config;
 
