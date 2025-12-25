@@ -1,0 +1,27 @@
+{
+  "name": "nextcloud-nodejs-talk-bot",
+  "version": "1.0.0",
+  "description": "A Node.js bot for Nextcloud Talk",
+  "main": "index.js",
+  "keywords": [
+    "nextcloud",
+    "nextcloud-talk",
+    "bot",
+    "nodejs",
+    "knex",
+    "mysql",
+    "automation"
+  ],
+  "license": "MIT",
+  "author": "kekoffer k3koffer@gmail.com (https://github.com/k3koffer)",
+  "scripts": {
+    "start": "node index.js",
+    "dev": "nodemon index.js"
+  },
+  "dependencies": {
+    "axios": "^1.13.2",
+    "dotenv": "^17.2.3",
+    "knex": "^3.1.0",
+    "mysql2": "^3.15.3"
+  }
+}

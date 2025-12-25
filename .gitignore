@@ -1,0 +1,4 @@
+node_modules/
+src/features/commands.js
+.env
+status.json
