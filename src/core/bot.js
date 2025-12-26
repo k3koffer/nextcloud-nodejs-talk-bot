@@ -1,5 +1,5 @@
 let logger = require('./logger');
-let client = require('./client').default;
+let client = require('./client');
 let tools = require('../utils/functions');
 let config = require('../config/index');
 
@@ -30,6 +30,8 @@ class Conversation {
                 
                 if (data.length > 0) {
                     for (const msg of data) {
+                        if (msg.actorId == config.botUsername) return;
+
                         logger.log(`[${token}] 📩 New message from ${msg.actorDisplayName}: ${msg.message}`);
                         
                         await this.bot.processNewMessage(msg, token);
@@ -66,6 +68,7 @@ class NextcloudTalkBot {
         console.log('Starting bot...');
 
         let conversations = await tools.getOpenedConversations(server, auth)
+
         this.conversations = tools.getOneOnOneConversations(conversations);
 
         this.conversations.forEach(element => {

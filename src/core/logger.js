@@ -1,7 +1,5 @@
-require('dotenv').config();
-let fs = require('fs');
-
-let DEBUG = process.env.DEBUG === '1';
+const config = require('../config/index');
+let DEBUG = Boolean(Number(config.debugMode));
 
 let logger = {
     log: (...args) => {

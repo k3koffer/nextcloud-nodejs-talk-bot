@@ -1,5 +1,5 @@
 let config = require('../config/index.js');
-let axios = require('axios');
+let axios = require('axios').default;
 
 const USER = config.botUsername
 const PASS = config.appPassword;
