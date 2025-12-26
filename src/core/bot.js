@@ -30,7 +30,7 @@ class Conversation {
                 
                 if (data.length > 0) {
                     for (const msg of data) {
-                        if (msg.actorId == config.botUsername) return;
+                        if (msg.actorId == config.botUsername) continue;
 
                         logger.log(`[${token}] 📩 New message from ${msg.actorDisplayName}: ${msg.message}`);
                         
