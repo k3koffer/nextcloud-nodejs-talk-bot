@@ -7,8 +7,9 @@ let config = {
     'botUsername': process.env.NC_USER,
     'appPassword': process.env.NC_PASS,
     'authString': tools.generateAuth(process.env.NC_USER, process.env.NC_PASS),
-    'commandPrefix': process.env.BOT_PREFIX || '!'
+    'commandPrefix': process.env.BOT_PREFIX || '!',
+    'debugMode': process.env.DEBUG === '1'
 };
 
-module.exports = { config };
+module.exports = { ...config };
 

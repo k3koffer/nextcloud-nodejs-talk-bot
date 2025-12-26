@@ -1,5 +1,5 @@
-import { config } from '../config/index.js';
-import axios from 'axios';
+let config = require('../config/index.js');
+let axios = require('axios').default;
 
 const USER = config.botUsername
 const PASS = config.appPassword;
@@ -16,4 +16,4 @@ const client = axios.create({
     timeout: 10000 
 });
 
-export default client;
+module.exports = client;
