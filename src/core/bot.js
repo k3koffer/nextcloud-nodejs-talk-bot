@@ -92,6 +92,7 @@ class NextcloudTalkBot {
     
     processNewMessage = async function (msgData, token) {
         let ctx = {
+            bot: this,
             message: msgData,
             text: msgData.message.trim(),
             actor: msgData.actorDisplayName,
@@ -112,9 +113,19 @@ class NextcloudTalkBot {
                 }
             },
 
-            send: async (text) => {
+            send: async (targetUser, text) => {
+                let conversation = this.conversations.find(conv => conv.name === targetUser);
+
+                let targetToken;
+                if (conversation) {
+                    targetToken = conversation.token;
+                } else {
+                    logger.error(`No conversation found with user: ${targetUser}`);
+                    return false;
+                }
+
                 try {
-                    let response = await client.post(`/ocs/v2.php/apps/spreed/api/v1/chat/${token}`, {
+                    let response = await client.post(`/ocs/v2.php/apps/spreed/api/v1/chat/${targetToken}`, {
                         message: text,
                     });
 
@@ -123,6 +134,28 @@ class NextcloudTalkBot {
                     }
                 } catch (e) {
                     logger.error(`Sending message error: ${e.message}`);
+                }
+                
+                return true;
+            },
+
+            react: async (targetUser, messageId, emoji) => {
+                let conversation = this.conversations.find(conv => conv.name === targetUser);
+                let targetToken;
+
+                if (conversation) {
+                    targetToken = conversation.token;
+                } else {
+                    logger.error(`No conversation found with user: ${targetUser}`);
+                    return false;
+                };
+
+                try {
+                    let response = await client.post(`/ocs/v2.php/apps/spreed/api/v1/reaction/${targetToken}/${messageId}`, {
+                        reaction: emoji,
+                    });
+                } catch (e) {
+                    logger.error(`Sending reaction error: ${e.message}`);
                 }
             }
         }
@@ -141,6 +174,29 @@ class NextcloudTalkBot {
         };
 
         await next();
+    };
+
+    broadcastMessage = async function (text) {
+        const targets = this.conversations.map(c => c.token);
+        logger.log(`📢 Начинаю рассылку на ${targets.length} чатов...`);
+
+        let successCount = 0;
+        for (const token of targets) {
+            try {
+                await client.post(`/ocs/v2.php/apps/spreed/api/v1/chat/${token}`, {
+                    message: text
+                });
+                successCount++;
+        
+                await new Promise(resolve => setTimeout(resolve, 200)); 
+                
+            } catch (e) {
+                logger.error(`❌ Не удалось отправить в ${token}: ${e.message}`);
+            }
+        }
+        
+        logger.log(`✅ Рассылка завершена. Успешно: ${successCount}`);
+        return successCount;
     };
 
     matchCommands = async function (ctx) {

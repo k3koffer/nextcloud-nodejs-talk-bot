@@ -8,7 +8,8 @@ let config = {
     'appPassword': process.env.NC_PASS,
     'authString': tools.generateAuth(process.env.NC_USER, process.env.NC_PASS),
     'commandPrefix': process.env.BOT_PREFIX || '!',
-    'debugMode': process.env.DEBUG === '1'
+    'debugMode': process.env.DEBUG === '1',
+    'adminName': process.env.NC_ADMINNAME
 };
 
 module.exports = { ...config };

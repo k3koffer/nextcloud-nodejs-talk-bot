@@ -1,4 +1,6 @@
 node_modules/
 src/features/commands.js
+src/features/admin.js
+src/features/admin_chat.js
 .env
 status.json
